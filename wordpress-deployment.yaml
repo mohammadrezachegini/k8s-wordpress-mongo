@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec:
+      containers:
+      - name: wordpress
+        image: wordpress
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: MONGO_INITDB_ROOT_USERNAME
+        - name: WORDPRESS_DB_PORT
+          value: “27017”
+        - name: WORDPRESS_DB_PASSWORD
+          value: MONGO_INITDB_ROOT_PASSWORD
+        ports:
+        - containerPort: 80
+
